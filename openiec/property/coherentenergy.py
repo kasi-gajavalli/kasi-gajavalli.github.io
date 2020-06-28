@@ -2,6 +2,7 @@
 Obtain quantities correlating with thremodynamic equilibrium calculation using the pycalphad package.
 """
 
+from pycalphad import Database
 import matplotlib.pyplot as plt
 from pycalphad import equilibrium
 from pycalphad import Database, Model
@@ -9,6 +10,19 @@ import pycalphad.variables as v
 import numpy as np
 import math
 
+ """
+    My addition
+    """
+    # Given temperature.
+    T = 1273
+    # Given initial alloy composition. x0 corresponds to the mole fractions of Al and Cr.
+    x0 = [0.180000, 0.008100]  
+    # Render thermodynamic database.
+    db = Database("NiAlCrHuang1999.tdb")
+    # Define components in the interface.
+    comps = ["NI", "AL", "CR", "VA"]
+    # Two phases separated by the interface.
+    phasenames = ["FCC_A1", "GAMMA_PRIME"]
 
 class CoherentGibbsEnergy(object):
     """
@@ -171,4 +185,6 @@ class CoherentGibbsEnergy(object):
             for i in range(len(self.phasename))
         ]
         return yys
+
+    print('********************************************************************* Equilibria:************************************************************','\n')
 
